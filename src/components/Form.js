@@ -1,6 +1,21 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { CategoriesContext } from "./context/CategoriesProvider";
 
 const Form = () => {
+  const [search, setSearch] = useState({
+    name: "",
+    category: ""
+  });
+
+  const { categories } = useContext(CategoriesContext);
+
+  const handleChange = e => {
+    setSearch({
+      ...search,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <form className="flex flex-wrap w-full">
       <fieldset className="w-full text-center mb-8">
@@ -13,20 +28,27 @@ const Form = () => {
           name="name"
           type="text"
           placeholder="Ingredient"
+          onChange={handleChange}
         />
       </div>
 
       <div className="w-full sm:w-1/3 px-2 pb-2">
-        <div class="relative">
+        <div className="relative">
           <select
             className="appearance-none border-2 border-gray-300 rounded-lg w-full py-2 px-4 focus:outline-none block focus:shadow"
             name="category"
+            onChange={handleChange}
           >
             <option value="">Category</option>
+            {categories.map(category => (
+              <option key={category.strCategory} value={category.strCategory}>
+                {category.strCategory}
+              </option>
+            ))}
           </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
             <svg
-              class="fill-current h-4 w-4"
+              className="fill-current h-4 w-4"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
             >
