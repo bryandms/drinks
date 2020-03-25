@@ -7,6 +7,7 @@ const Form = () => {
     name: "",
     category: ""
   });
+  const [error, setError] = useState(false);
 
   const { categories } = useContext(CategoriesContext);
   const { setSearchRecipes, setRequest } = useContext(RecipesContext);
@@ -18,17 +19,33 @@ const Form = () => {
     });
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (validateRequest()) {
+      setSearchRecipes(search);
+      setRequest(true);
+    }
+  };
+
+  const validateRequest = () => {
+    const { name, category } = search;
+
+    if (name.trim() === "" || category.trim() === "") {
+      setError(true);
+      return false;
+    }
+
+    setError(false);
+    return true;
+  };
+
   return (
-    <form
-      className="flex flex-wrap w-full"
-      onSubmit={e => {
-        e.preventDefault();
-        setSearchRecipes(search);
-        setRequest(true);
-      }}
-    >
+    <form className="flex flex-wrap w-full" onSubmit={handleSubmit}>
       <fieldset className="w-full text-center mb-8">
         <legend>Search drinks by category or ingredient</legend>
+        {error && (
+          <p className="text-red-500 italic">The fields are required.</p>
+        )}
       </fieldset>
 
       <div className="w-full sm:w-1/3 px-2 pb-2">
