@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import Form from "./components/Form";
-import CategoriesProvider from "./components/context/CategoriesProvider";
+import CategoriesProvider from "./context/CategoriesProvider";
 
 const App = () => {
   return (

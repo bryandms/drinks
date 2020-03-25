@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { CategoriesContext } from "./context/CategoriesProvider";
+import { CategoriesContext } from "../context/CategoriesProvider";
 
 const Form = () => {
   const [search, setSearch] = useState({
