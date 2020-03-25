@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { CategoriesContext } from "../context/CategoriesProvider";
+import { RecipesContext } from "../context/RecipesProvider";
 
 const Form = () => {
   const [search, setSearch] = useState({
@@ -8,6 +9,7 @@ const Form = () => {
   });
 
   const { categories } = useContext(CategoriesContext);
+  const { setSearchRecipes, setRequest } = useContext(RecipesContext);
 
   const handleChange = e => {
     setSearch({
@@ -17,7 +19,14 @@ const Form = () => {
   };
 
   return (
-    <form className="flex flex-wrap w-full">
+    <form
+      className="flex flex-wrap w-full"
+      onSubmit={e => {
+        e.preventDefault();
+        setSearchRecipes(search);
+        setRequest(true);
+      }}
+    >
       <fieldset className="w-full text-center mb-8">
         <legend>Search drinks by category or ingredient</legend>
       </fieldset>
