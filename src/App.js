@@ -4,22 +4,25 @@ import Form from "./components/Form";
 import RecipeList from "./components/RecipeList";
 import CategoriesProvider from "./context/CategoriesProvider";
 import RecipesProvider from "./context/RecipesProvider";
+import ModalProvider from "./context/ModalProvider";
 
 const App = () => {
   return (
     <CategoriesProvider>
       <RecipesProvider>
-        <Header />
+        <ModalProvider>
+          <Header />
 
-        <div className="container mx-auto m-12">
-          <div className="flex p-4">
-            <Form />
-          </div>
+          <div className="container mx-auto m-12">
+            <div className="flex p-4">
+              <Form />
+            </div>
 
-          <div className="flex p-4">
-            <RecipeList />
+            <div className="flex p-4">
+              <RecipeList />
+            </div>
           </div>
-        </div>
+        </ModalProvider>
       </RecipesProvider>
     </CategoriesProvider>
   );
